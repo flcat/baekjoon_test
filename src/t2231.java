@@ -6,15 +6,29 @@ public class t2231 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(br.readLine());
-        int arr[] = new int[String.valueOf(n).length()];
-        int tmp = 1;
-        for(int i = 0 ; i < String.valueOf(n).length() ; i++) {
-            arr[i] = n%(10*tmp)/tmp;
-            tmp*=10;
-            bw.write(arr[i]+" ");
-        }
+
+        bw.write(device(n)+"");
         br.close();
         bw.flush();
         bw.close();
+    }
+    private static int device(int n) {
+        int count = 0;
+
+        while(true) {
+            int sum = 0;
+            count++;
+            String sC = String.valueOf(count);
+            for (int i = 0; i < sC.length(); i++) {
+                sum += sC.charAt(i) - '0';
+            }
+            sum+=count;
+            if (sum == n) {
+                return count;
+            }
+            if (count == n) {
+                return 0;
+            }
+        }
     }
 }
