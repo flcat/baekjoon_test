@@ -7,6 +7,27 @@ public class t1018 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st;
 
+        char checkBlack[][] = {
+                {'B','W','B','W','B','W','B','W'},
+                {'W','B','W','B','W','B','W','B'},
+                {'B','W','B','W','B','W','B','W'},
+                {'W','B','W','B','W','B','W','B'},
+                {'B','W','B','W','B','W','B','W'},
+                {'W','B','W','B','W','B','W','B'},
+                {'B','W','B','W','B','W','B','W'},
+                {'W','B','W','B','W','B','W','B'},
+        };
+        char checkWhite[][] = {
+                {'W','B','W','B','W','B','W','B'},
+                {'B','W','B','W','B','W','B','W'},
+                {'W','B','W','B','W','B','W','B'},
+                {'B','W','B','W','B','W','B','W'},
+                {'W','B','W','B','W','B','W','B'},
+                {'B','W','B','W','B','W','B','W'},
+                {'W','B','W','B','W','B','W','B'},
+                {'B','W','B','W','B','W','B','W'},
+        };
+
         st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
@@ -20,23 +41,27 @@ public class t1018 {
             }
         }
 
-        //배열에 넣고 만약 0,0이 b면 bwbwbw w면 wbwbwb로만 나와야함.
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (board[0][0] == 'B') {
-                    if (board[j][i] == 'B' && board[j][i] != 'W') {
-                        count++;
-                    }
-                } else {
-                    if (board[j][i] == 'W' && board[j][i] != 'B') {
-                        count++;
-                    }
+        int answer =  Integer.MAX_VALUE;
+        for (int i = 0; i <= m - 8; i++) {
+            for (int j = 0; j <= n - 8; j++) {
+                for(int k = 0; k < 8; k++) {
+                    //if (board[0][0] == 'B') {
+                        if (checkBlack[i][j] != board[i+k][j+k]) {
+                            count++;
+                        }
+                    //} else {
+                        //if (checkWhite[i][j] != board[i+k][j+k]) {
+                        //    count++;
+                        //}
+                    //}
                 }
             }
+            if(count >= 32) { count = 64 - count; }
+            answer = Math.min(answer, count);
         }
 
+        bw.write(answer+"");
 
-        bw.write("\n"+count);
         br.close();
         bw.flush();
         bw.close();
