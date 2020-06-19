@@ -28,13 +28,13 @@ public class t10067 {
     }
 
     private static boolean canSkip(int k, int i, int j,int threshold) {
-        return (D[(K%2)-1][i] - D[(K%2)-1][j] + S[N] * (S[j] - S[i]))
+        return (D[(k-1)%2][i] - D[(k-1)%2][j] + S[N] * (S[j] - S[i]))
                 <= threshold * (S[j] - S[i]);
     }
 
     private static boolean canRemoveLastCandidate(int k, int i, int j, int l) {
-        return (D[(K%2)-1][i] - D[(K%2)-1][j] + S[N] * (S[j] - S[i])) * (S[l] - S[j])
-                <= (D[(K%2)-1][j] - D[(K%2)-1][l] + S[N] * (S[l] - S[j])) * (S[j] - S[i]);
+        return (D[(k-1)%2][i] - D[(k-1)%2][j] + S[N] * (S[j] - S[i])) * (S[l] - S[j])
+                <= (D[(k-1)%2][j] - D[(k-1)%2][l] + S[N] * (S[l] - S[j])) * (S[j] - S[i]);
     }
 
     private static void dp(int k) {
@@ -42,12 +42,12 @@ public class t10067 {
         candid.addLast(k-1);
 
         for(int i = k ; i <= N ; i++) {
-            while (candid.size() > 1 && canSkip(k, candid.get(0), candid.get(1), Math.toIntExact(S[i]))) {
+            while (candid.size() > 1 && canSkip(k, candid.getFirst(), candid.get(1), (int) S[i])) {
                 candid.removeFirst();
             }
                 int j = candid.getFirst();
                 OPT[k][i] = j;
-                D[(K%2)][i] = D[(K%2)-1][j] + S[i] * S[j] - S[N] * S[j] + S[N] * S[i] - (S[i] * S[i]);
+                D[(k%2)][i] = D[(k-1)%2][j] + S[i] * S[j] - S[N] * S[j] + S[N] * S[i] - (S[i] * S[i]);
 
             while (candid.size() > 1
                     && canRemoveLastCandidate(k, i, candid.getLast(), candid.get(candid.size()-2))) {
@@ -69,7 +69,7 @@ public class t10067 {
     }
     private static void solve() throws IOException {
         for(int k = 1 ; k <= K ; k++) {
-            Arrays.fill(D[K%2], 0);
+            Arrays.fill(D[k%2], 0);
             dp(k);
         }
         long ret = 0; int ind = 1;
