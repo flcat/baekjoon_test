@@ -45,15 +45,15 @@ public class t1018 {
         for (int i = 0; i <= m - 8; i++) {
             for (int j = 0; j <= n - 8; j++) {
                 for(int k = 0; k < 8; k++) {
-                    //if (board[0][0] == 'B') {
+                    if (board[0][0] == 'B') {
                         if (checkBlack[i][j] != board[i+k][j+k]) {
                             count++;
                         }
-                    //} else {
-                        //if (checkWhite[i][j] != board[i+k][j+k]) {
-                        //    count++;
-                        //}
-                    //}
+                    } else {
+                        if (board[i+k][j+k] != checkWhite[i][j]) {
+                            count++;
+                        }
+                    }
                 }
             }
             if(count >= 32) { count = 64 - count; }
