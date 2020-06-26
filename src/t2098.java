@@ -8,6 +8,6 @@ public class t2098 {
         StringTokenizer st;
 
         int n = Integer.parseInt(br.readLine());
-        asdasdasd
+
     }
 }
