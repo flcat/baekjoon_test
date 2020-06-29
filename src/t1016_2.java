@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class t1016_2 {
@@ -16,7 +17,7 @@ public class t1016_2 {
         max = Long.parseLong(st.nextToken());
         flag = new boolean[(int)(max-min+1)];
         count = 0;
-
+        Arrays.fill(flag,true);
         linearSieve(max,min);
 
         bw.write(count+"");
@@ -25,15 +26,22 @@ public class t1016_2 {
         bw.close();
     }
     private static void linearSieve(long max,long min) {
-        for(long i = 2; i < flag.length ; i++) {
-            if(!flag[(int) i]) {
-                count++;
+        for(long i = 2; i * i <= max ; i++) {
+            long square = i * i;
+            long begin = min - min % square;
+            if(begin < min) {
+                begin += square;
             }
-            long square = i*i;
-            long begin = min + (square - (min % square)) % square;
-            for(long j = begin; j <= flag.length && j - min <= max; j+=square) {
-                flag[(int) (j-min)] = true;
-                if(i % j == 0) { break; }
+            for(long j = begin; j <= max ; j++) {
+                if(!flag[(int) (j % square)] ) {
+                    flag[(int) (j - min)] = false;
+                    j += (square - 1);
+                }
+            }
+        }
+        for(int i = 0; i < flag.length; i++) {
+            if(!flag[i]) {
+                count++;
             }
         }
     }

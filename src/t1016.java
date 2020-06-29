@@ -16,7 +16,7 @@ public class t1016 {
         boolean flag[] = new boolean[(int)(max-min+1)];
         int count = 0;
         for(long i = 2 ; i*i <= max ; i++){
-            long square = i*i;
+            long square = i * i;
             long begin = min + (square - (min % square)) % square;
             for(long j = begin ; j <= max ; j+=square) {
                 flag[(int)(j-min)] = true;
