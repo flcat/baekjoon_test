@@ -17,16 +17,17 @@ public class t1365 {
          tree = new int[max * 4];
 
          st = new StringTokenizer(br.readLine());
-         for(int i = 1; i <= n; i++) {
+         for(int i = 0; i < n; i++) {
              uPole[i] = Integer.parseInt(st.nextToken());
          }
-
-         for(int i = 1; i <= n; i++) {
-             int m = sum(1, 1, uPole[i]+"".indexOf(i),1, n) + 1;
-             update(1, uPole[i]+"".indexOf(i), m, 1, n);
+         int answer = 0;
+         for(int i = 0; i < n; i++) {
+             int m = sum(1,1,uPole[i] - 1,1,n) + 1;
+             update(1,uPole[i], m, 1, n);
+             answer = Math.max(answer, m);
          }
 
-         bw.write(n - sum(1, 1, n, 1, n)+"\n");
+         bw.write(n - answer+"");
 
          br.close();
          bw.flush();
