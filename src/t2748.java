@@ -17,10 +17,10 @@ public class t2748 {
     }
     private static long dp(long a) {
         if(n <= 1) return n;
-        d[0] = 0;
-        d[1] = 1;
+            d[0] = 0;
+            d[1] = 1;
         for(int i = 2; i <= a; i++) {
-            d[i % 3]= (d[(i - 1) % 3] + d[(i - 2) % 3]);
+            d[i % 3] = (d[(i - 1) % 3] + d[(i - 2) % 3]);
         }
     return d[n % 3];
     }
