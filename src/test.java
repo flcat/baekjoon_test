@@ -6,18 +6,18 @@ public class test {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        long n = Long.parseLong(st.nextToken());
-        long m = Long.parseLong(st.nextToken());
-        long x = 1;
-        int count = 0;
-        for(long i = n ; i <= m ; i++) {
-            double a = (x = (x + (i / x)) / 2) ;
-            if(i != a*a) {
-                count++;
-            }
+        long[] P = new long[101];
+        P[1] = 1; P[2] = 1; P[3] = 1; P[4] = 2; P[5] = 2;
+        for(int i = 6; i <= 100; i++){
+            P[i] = P[i - 1] + P[i - 5];
         }
-        bw.write(count+"");
+
+        int T = Integer.parseInt(br.readLine());
+        for (int i = 0; i < T; i++) {
+            int N = Integer.parseInt(br.readLine());
+            bw.write(P[N] + "\n");
+        }
+
 
         bw.flush();
         br.close();
